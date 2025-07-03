@@ -46,7 +46,7 @@ class game {
         else if(number>75 && number<=90){
             cout<<"you won tier 2 gear !"<<endl;
             coin = coin + 20;
-            tier2=1;
+            tier2+=1;
         }
         else if(number > 90 && number<=95){
             cout<<"you won tier 3 gear !"<<endl;
