@@ -32,7 +32,6 @@ class game {
             break;
         }
         for(int i=0 ; i<round ; i++){
-        // bool won = true;
         number = rand() % 100;
         if(number>=0 && number <=50){
             cout<<"better luck next time !"<<endl;
