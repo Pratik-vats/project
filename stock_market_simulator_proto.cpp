@@ -23,14 +23,14 @@ double generateprice(){
 void buy(double &cash ,double price , int qty , int &stock){
     stock+=qty;
     double bought=price*qty;
-    cout<<"Buy "<<qty<<" stock at price "<<bought<<endl<<endl;
+    cout << "Buy " << qty << " stock at price " << price << " each. Total: " << bought << endl;
     cash -=bought;
 }
 
 void sell(double &cash ,double price ,int &stock , int qty){
     double sold = price*qty;
     stock -= qty;
-    cout<<"Sell "<<qty<<" stock at price "<<sold<<endl<<endl;
+    cout << "Sell " << qty << " stock at price " << price << " each. Total: " << sold << endl;
     cash +=sold;
 }
 
@@ -40,8 +40,8 @@ bool trade(double tprice ,double &cash , int &stock){
         qty=(int)cash/tprice;
         if(qty>0){
             buy(cash ,tprice,qty,stock);
+            return true;
         }
-        return true;
     }
     if(stock>0 && tprice>102){
         qty = stock;
@@ -51,23 +51,28 @@ bool trade(double tprice ,double &cash , int &stock){
     return false;
 }
 
-void display(double cash , int stock){
-    cout<<"Displaying info ---"<<endl;
+void display(double cash , int stock , double price , double icash){
     cout<<"Cash = "<<cash<<endl;
     cout<<"Stock = "<<stock<<endl;
+    double total=cash + stock*price;
+    cout<<"total = "<<total<<endl;
+    cout<<"profit = "<<total-icash<<endl;
+    cout<<"----------------------"<<endl;
     cout<<endl;
 }
 
 int main(){
     srand(time(0));
-    Market m(1000);
+    double icash ;
+    cout<<"Initial cash :: ";
+    cin>>icash;
+    Market m(icash);
     for(int i=0;i<100;i++){
         double price = generateprice();
         if(trade(price , m.cash , m.stock)){
             cout<<"current market price : "<<price<<endl;
-            display(m.cash , m.stock);
+            display(m.cash , m.stock , price , icash);
         }  
     }
     return 0;
 }
-
